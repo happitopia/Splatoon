@@ -1,19 +1,25 @@
 language: java
 jdk:
-#- oraclejdk7
 - openjdk7
 notifications:
   email: false
-deploy:
-  provider: s3
-  access_key_id: FX6T9hFfwYvXJO9EOalr
-  secret_access_key:
-    secure: "XEkOtTWJAbENUX4fUJjSjufd2K3xSOUyma4rxHev+wSLa4JdM1R0nwCaERTcYTFdJoFcuNHxfV/WX+u8x+vbSibGbIWy//sShHupVjt8RhwBDG6mjv6D36luN9ljw+QuaPnAqmBNqzP8eqB4F+GJrp4rUFnYralcIV0kGxbHfbdkGxYlKbXlc/9b+/TImJ06kEgxa7tHlatuYLZZuD281/aXCwd/HOVObKnn8yUSUBjksURakLgR7UatY7t/LsJtFt1cz6DmY+C6gnpdCLD7r83VDGKDdGcMW7+KbOTThtgOgzPcOJV0audz9EhQorzZ09pqbhr24xn2X1QE0x0ac+9FPHYjvzMOGttAY6zAxQergoeiCbehJBabfPSBzrrsiWN80F+U1CS4zi76W02t99vl2eDvJFTivWyr4VxfQiPbnBIAZlltw0M1WL8Z5gQGFMkIyy5HURgjNRmjl1QLaJTXv1g4rlutX/Omxpj7CoCTpE2d4BLp7/iatTIeNwlQCxOfosdPLS7oWXq/r18lFhjyoyuFHW1vG9+C/4KW0BxbOQ7OVvToSCPcjGpsKsYK1CNBIdN3HShSvxeRiu+f+YlOE4n9UodREnRfoM4jfnnn895lL3Gxg0j4UHm823spedDw2FKxCPJ84tVYu3jMsQwVAWaS4Y5vEcuGWHWPr0w="
-  bucket: nuevahistory2015
-  local-dir: target
-  upload-dir: build
-  acl: public_read
-  endpoint: objects.dreamhost.com
-  on:
-    repo: NuevaHistoryGame2015/MinecraftGame
-  skip_cleanup: true
+#deploy:
+#  provider: s3
+#  access_key_id: FX6T9hFfwYvXJO9EOalr
+#  secret_access_key:
+#    secure: XEkOtTWJAbENUX4fUJjSjufd2K3xSOUyma4rxHev+wSLa4JdM1R0nwCaERTcYTFdJoFcuNHxfV/WX+u8x+vbSibGbIWy//sShHupVjt8RhwBDG6mjv6D36luN9ljw+QuaPnAqmBNqzP8eqB4F+GJrp4rUFnYralcIV0kGxbHfbdkGxYlKbXlc/9b+/TImJ06kEgxa7tHlatuYLZZuD281/aXCwd/HOVObKnn8yUSUBjksURakLgR7UatY7t/LsJtFt1cz6DmY+C6gnpdCLD7r83VDGKDdGcMW7+KbOTThtgOgzPcOJV0audz9EhQorzZ09pqbhr24xn2X1QE0x0ac+9FPHYjvzMOGttAY6zAxQergoeiCbehJBabfPSBzrrsiWN80F+U1CS4zi76W02t99vl2eDvJFTivWyr4VxfQiPbnBIAZlltw0M1WL8Z5gQGFMkIyy5HURgjNRmjl1QLaJTXv1g4rlutX/Omxpj7CoCTpE2d4BLp7/iatTIeNwlQCxOfosdPLS7oWXq/r18lFhjyoyuFHW1vG9+C/4KW0BxbOQ7OVvToSCPcjGpsKsYK1CNBIdN3HShSvxeRiu+f+YlOE4n9UodREnRfoM4jfnnn895lL3Gxg0j4UHm823spedDw2FKxCPJ84tVYu3jMsQwVAWaS4Y5vEcuGWHWPr0w=
+#  bucket: nuevahistory2015
+#  local-dir: target
+#  upload-dir: build
+#  acl: public_read
+#  endpoint: objects.dreamhost.com
+#  on:
+#    repo: NuevaHistoryGame2015/MinecraftGame
+#  skip_cleanup: true
+before_install:
+  - openssl aes-256-cbc -K $encrypted_feb4fc3dc1b5_key -iv $encrypted_feb4fc3dc1b5_iv
+  -in .travis/happiserver.enc -out .travis/happiserver.pem -d
+after_success:
+  - chmod 600 .travis/deploy_key.pem # this key should have push access
+  - ssh-add .travis/happiserver.pem
+  - rsync -avz target mvserver@happi.pw:/home/mcserver/build
