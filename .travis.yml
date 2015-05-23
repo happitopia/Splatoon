@@ -1,12 +1,9 @@
 language: java
 jdk:
-- oraclejdk7
+#- oraclejdk7
 - openjdk7
 notifications:
   email: false
-script:
-- bundle exec mvn install
-- bundle exec mvn test
 deploy:
   provider: s3
   access_key_id: FX6T9hFfwYvXJO9EOalr
