@@ -8,3 +8,6 @@ after_success:
 - chmod 600 .travis/happiserver
 - ssh-add .travis/happiserver
 - rsync -avz target mvserver@happi.pw:/home/mcserver/build
+addons:
+  ssh_known_hosts:
+  - happi.pw
