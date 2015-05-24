@@ -4,9 +4,9 @@ jdk:
 notifications:
   email: change
 before_install:
-  - openssl aes-256-cbc -K $encrypted_feb4fc3dc1b5_key -iv $encrypted_feb4fc3dc1b5_iv
-  - in .travis/happiserver.enc -out .travis/happiserver.pem -d
+- openssl aes-256-cbc -K $encrypted_feb4fc3dc1b5_key -iv $encrypted_feb4fc3dc1b5_iv
+- in happiserver.enc -out .travis/happiserver -d
 after_success:
-  - chmod 600 .travisdata/happiserver.pem # this key should have push access
-  - ssh-add .travisdata/happiserver.pem
-  - rsync -avz target mvserver@happi.pw:/home/mcserver/build
+- chmod 600 .travis/happiserver
+- ssh-add .travis/happiserver
+- rsync -avz target mvserver@happi.pw:/home/mcserver/build
