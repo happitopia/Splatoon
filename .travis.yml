@@ -4,9 +4,6 @@ jdk:
 notifications:
   email: change
 after_success:
-- openssl aes-256-cbc -K $encrypted_feb4fc3dc1b5_key -iv $encrypted_feb4fc3dc1b5_iv -in .travis/happiserver.enc -out .travis/happiserver -d
-- chmod 600 .travis/happiserver
-- ssh-add .travis/happiserver
 - rsync -avz target -e 'ssh -i .travis/happiserver' mvserver@happi.pw:/home/mcserver/build
 addons:
   ssh_known_hosts:
