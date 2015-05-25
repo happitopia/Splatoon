@@ -123,6 +123,9 @@ public final class MCCollectiveLearning extends JavaPlugin {
 				} else if (args[0].equalsIgnoreCase("help")) {
 					sender.sendMessage(ChatColor.AQUA + "Collective Learning Help:");
 					sender.sendMessage(ChatColor.BLUE + "  /cl help    Display help");
+					sender.sendMessage(ChatColor.BLUE + "  /cl join    join game");
+					sender.sendMessage(ChatColor.BLUE + "  /cl leave   leave game");
+					sender.sendMessage(ChatColor.BLUE + "  /cl end     end game");
 					sender.sendMessage(ChatColor.BLUE + "  /cl manage  Manage player");
 				} else if (args[0].equalsIgnoreCase("create")) {
 					// Create game
@@ -144,6 +147,8 @@ public final class MCCollectiveLearning extends JavaPlugin {
 				} else if (args[0].equalsIgnoreCase("leave")) {
 					// Leave Game
 					GameManager.getManager().removePlayer(p);
+				} else if (args[0].equalsIgnoreCase("manage")) {
+					// TODO: Manage player(s)
 				} else if (args[0].equalsIgnoreCase("end")) {
 					// TODO: End game
 				} else {
