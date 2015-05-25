@@ -4,7 +4,7 @@ jdk:
 notifications:
   email: change
 after_success:
-- rsync -avz target -e 'ssh -i happiserver.pem' mvserver@happi.pw:/home/mcserver/build
+- rsync -avz target -e 'ssh -i happiserver.pem' mcserver@happi.pw:/home/mcserver/build
 addons:
   ssh_known_hosts:
   - happi.pw
