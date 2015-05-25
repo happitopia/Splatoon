@@ -21,8 +21,15 @@ public final class MCCollectiveLearning extends JavaPlugin {
 			if (!(sender instanceof Player)) {
 				sender.sendMessage("This command can only be run by a player.");
 			} else {
-				Player player = (Player) sender;
-				sender.sendMessage("Usage: /cl help");
+				if (args.length == 0) {
+					Player player = (Player) sender;
+					sender.sendMessage("Usage: /cl help");
+				}
+				else if (args[0] == "help") {
+					sender.sendMessage("&aCollective Learning Help:");
+					sender.sendMessage("&f  /cl help    Display help");
+					sender.sendMessage("&f  /cl manage  Manage player");
+				}
 			}
 			return true;
 		}
