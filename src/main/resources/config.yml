@@ -1,0 +1,19 @@
+# This is the main configuration file for the Collective Learning plugin
+
+# Do not change this value.  It will cause this file to be replaced
+ConfigVersion: 0.1
+
+mysql:
+  user: username
+  port: 3306
+  password: pass
+  host: localhost
+  database: minecraft
+
+permissions:
+    cl.*:
+        description: Gives access to all Collective Learning commands
+        children:
+            cl.startGame: true
+            cl.pauseGame: true
+            cl.endGame: true
