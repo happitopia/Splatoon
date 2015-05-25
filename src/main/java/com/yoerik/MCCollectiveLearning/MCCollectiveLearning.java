@@ -24,7 +24,6 @@ public final class MCCollectiveLearning extends JavaPlugin {
 				Player player = (Player) sender;
 				sender.sendMessage("Usage: /cl help");
 			}
-			sender.sendMessage("HI");
 			return true;
 		}
 		return false;
