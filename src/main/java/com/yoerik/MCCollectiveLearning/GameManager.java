@@ -7,6 +7,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
+import org.bukkit.Location;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+
 // NOT THREAD SAFE!
 public class GameManager {
 	private static GameManager gm;
@@ -72,7 +78,7 @@ public class GameManager {
 		p.getInventory().setArmorContents(null);
 		p.getInventory().clear();
 		// Makes player use adventure
-		p.setGameMode(2);
+		p.setGameMode(GameMode.ADVENTURE);
 		// Save the players's last location before joining,
 		// then teleporting them to the game spawn
 		locs.put(p.getUniqueId(), p.getLocation());
@@ -120,6 +126,7 @@ public class GameManager {
 		inv.remove(p.getUniqueId());
 		armor.remove(p.getUniqueId());
 		// Teleport to original location, remove it too
+		p.setGameMode(GameMode.SURVIVAL);
 		p.teleport(locs.get(p.getUniqueId()));
 		locs.remove(p.getUniqueId());
 		p.setFireTicks(0);

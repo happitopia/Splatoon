@@ -123,6 +123,7 @@ public final class MCCollectiveLearning extends JavaPlugin {
 				} else if (args[0].equalsIgnoreCase("help")) {
 					sender.sendMessage(ChatColor.AQUA + "Collective Learning Help:");
 					sender.sendMessage(ChatColor.BLUE + "  /cl help    Display help");
+					sender.sendMessage(ChatColor.BLUE + "  /cl create  create game");
 					sender.sendMessage(ChatColor.BLUE + "  /cl join    join game");
 					sender.sendMessage(ChatColor.BLUE + "  /cl leave   leave game");
 					sender.sendMessage(ChatColor.BLUE + "  /cl end     end game");
