@@ -6,10 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 
 // NOT THREAD SAFE!
 public class GameManager {
@@ -37,7 +33,7 @@ public class GameManager {
 	 * @return the game possessing the specified ID
 	 */
 	public Game getGame(int i) {
-		for (Game g : this.games) {
+		for (Game g : games) {
 			if (g.getId() == i) {
 				return g;
 			}
@@ -58,12 +54,12 @@ public class GameManager {
 	 *        the game ID. A check will be done to ensure its validity.
 	 */
 	public void addPlayer(Player p, int i) {
-		Game g = this.getGame(i);
+		Game g = getGame(i);
 		if (g == null) {
 			p.sendMessage("Invalid game!");
 			return;
 		}
-		if (this.isInGame(p)) {
+		if (isInGame(p)) {
 			p.sendMessage("Cannot join more than 1 game!");
 			return;
 		}
@@ -75,6 +71,8 @@ public class GameManager {
 		// Clear inventory and armor
 		p.getInventory().setArmorContents(null);
 		p.getInventory().clear();
+		// Makes player use adventure
+		p.setGameMode(2);
 		// Save the players's last location before joining,
 		// then teleporting them to the game spawn
 		locs.put(p.getUniqueId(), p.getLocation());
@@ -94,7 +92,7 @@ public class GameManager {
 	public void removePlayer(Player p) {
 		Game g = null;
 		// Searches each game for the player
-		for (Game game : this.games) {
+		for (Game game : games) {
 			if (game.getPlayers().contains(p.getUniqueId())) g = game;
 		}
 		// Check game validity
@@ -135,9 +133,9 @@ public class GameManager {
 	 * @return the game created
 	 */
 	public Game createGame(Location l) {
-		this.gameSize++;
-		Game g = new Game(l, this.gameSize);
-		this.games.add(g);
+		gameSize++;
+		Game g = new Game(l, gameSize);
+		games.add(g);
 		return g;
 	}
 	
@@ -149,7 +147,7 @@ public class GameManager {
 	 * @return {@code true} if the player is in game
 	 */
 	public boolean isInGame(Player p) {
-		for (Game g : this.games) {
+		for (Game g : games) {
 			if (g.getPlayers().contains(p.getUniqueId())) return true;
 		}
 		return false;
