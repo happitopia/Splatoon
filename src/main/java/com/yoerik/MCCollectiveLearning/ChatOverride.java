@@ -49,11 +49,29 @@ public class ChatOverride {
 	}
 	
 	static String restrictMessage(String message) {
-		String[] msgTokens = message.split(" ");
+		if(message.isEmpty()) {
+			return message;
+		}
 		String finalMsg = "";
-		for (String word : msgTokens) {
-			if (allowedWords.get(word)) {
-				finalMsg += word + " ";
+		int index = 0;
+		for(int i = 0; i < message.length()) {
+			if(Character.isDigit(message.charAt(i))) {//is it a digit?
+				String word = message.substring(index, i);//get the previous word
+				if (allowedWords.get(word.toLowerCase())) {//check the word
+					finalMsg += word + message.charAt(i);
+					
+				}
+				if (allowedWords.get(""+message.charAt(i))) {//check the number
+					finalMsg += message.charAt(i);
+				}
+				index = i+1;
+			}
+			else if(Character.isWhitespace(message.charAt(i))) {//check for whitespace
+				String word = message.substring(index, i);//get the prevoius word
+				if (allowedWords.get(word.toLowerCase())) {//check the word
+					finalMsg += word + " ";
+				}
+				index = i+1
 			}
 		}
 		return finalMsg;
