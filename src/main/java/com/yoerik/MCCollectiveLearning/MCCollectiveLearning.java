@@ -121,9 +121,7 @@ public final class MCCollectiveLearning extends JavaPlugin {
 				sender.sendMessage("This command can only be run by a player.");
 			} else {
 				Player p = (Player) sender;
-				if (args.length == 0) {
-					sender.sendMessage(ChatColor.BLUE + "Usage: /cl help");
-				} else if (args[0].equalsIgnoreCase("help")) {
+				if (args.length == 0 || args[0].equalsIgnoreCase("help")) {
 					sender.sendMessage(ChatColor.AQUA + "Collective Learning Help:");
 					sender.sendMessage(ChatColor.BLUE + "  /cl help    Display help");
 					sender.sendMessage(ChatColor.BLUE + "  /cl create  create game");
@@ -155,8 +153,10 @@ public final class MCCollectiveLearning extends JavaPlugin {
 					// TODO: Manage player(s)
 				} else if (args[0].equalsIgnoreCase("end")) {
 					// TODO: End game
+				} else if (args[0].equalsIgnoreCase("kick")) {
+					// TODO: Kick player from game
 				} else {
-					sender.sendMessage(ChatColor.BLUE + "unrecognized command: " + args[0]);
+					sender.sendMessage(ChatColor.RED + "unrecognized command: " + args[0]);
 				}
 			}
 			return true;
