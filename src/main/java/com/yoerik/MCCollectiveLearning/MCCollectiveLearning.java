@@ -16,6 +16,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class MCCollectiveLearning extends JavaPlugin {
@@ -159,5 +162,15 @@ public final class MCCollectiveLearning extends JavaPlugin {
 			return true;
 		}
 		return false;
+	}
+	
+	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = false)
+	public void onAsyncPlayerChatEvent(AsyncPlayerChatEvent event) {
+		Player player = event.getPlayer();
+		String msg = event.getMessage();
+		if (msg == null) return;
+		ChatOverride co = new ChatOverride();
+		String resultMsg = co.restrictMessage(msg);
+		player.sendMessage(resultMsg);
 	}
 }
