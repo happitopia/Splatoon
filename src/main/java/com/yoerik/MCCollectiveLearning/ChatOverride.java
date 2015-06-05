@@ -4,9 +4,8 @@ package com.yoerik.MCCollectiveLearning;
 import java.util.HashMap;
 
 public class ChatOverride {
-	HashMap<String, Boolean> allowedWords = new HashMap<String, Boolean>();
-	
-	ChatOverride() {
+	private static HashMap<String, Boolean> allowedWords = new HashMap<String, Boolean>();
+	static {
 		allowedWords.put("tree", true);
 		allowedWords.put("block", true);
 		allowedWords.put("you", true);
@@ -49,7 +48,7 @@ public class ChatOverride {
 		allowedWords.put("10", true);
 	}
 	
-	String restrictMessage(String message) {
+	static String restrictMessage(String message) {
 		String[] msgTokens = message.split(" ");
 		String finalMsg = "";
 		for (String word : msgTokens) {

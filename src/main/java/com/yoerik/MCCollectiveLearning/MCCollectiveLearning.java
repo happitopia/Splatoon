@@ -169,8 +169,7 @@ public final class MCCollectiveLearning extends JavaPlugin {
 		Player player = event.getPlayer();
 		String msg = event.getMessage();
 		if (msg == null) return;
-		ChatOverride co = new ChatOverride();
-		String resultMsg = co.restrictMessage(msg);
+		String resultMsg = ChatOverride.restrictMessage(msg);
 		player.sendMessage(resultMsg);
 	}
 }
