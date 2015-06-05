@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -126,7 +125,7 @@ public class GameManager {
 		inv.remove(p.getUniqueId());
 		armor.remove(p.getUniqueId());
 		// Teleport to original location, remove it too
-		p.setGameMode(GameMode.SURVIVAL);
+		p.setGameMode(GameMode.ADVENTURE);
 		p.teleport(locs.get(p.getUniqueId()));
 		locs.remove(p.getUniqueId());
 		p.setFireTicks(0);
