@@ -45,7 +45,7 @@ public class ChatOverride {
 		allowedWords.put("7", true);
 		allowedWords.put("8", true);
 		allowedWords.put("9", true);
-		allowedWords.put("10", true);
+		allowedWords.put("0", true);
 	}
 	
 	static String restrictMessage(String message) {
