@@ -10,7 +10,7 @@ public class ChatOverride {
 		allowedWords.put("block", true);
 		allowedWords.put("you", true);
 		allowedWords.put("me", true);
-		allowedWords.put("I", true);
+		allowedWords.put("i", true);
 		allowedWords.put("water", true);
 		allowedWords.put("axe", true);
 		allowedWords.put("sword", true);
@@ -36,16 +36,6 @@ public class ChatOverride {
 		allowedWords.put("farm", true);
 		allowedWords.put("day", true);
 		allowedWords.put("night", true);
-		allowedWords.put("1", true);
-		allowedWords.put("2", true);
-		allowedWords.put("3", true);
-		allowedWords.put("4", true);
-		allowedWords.put("5", true);
-		allowedWords.put("6", true);
-		allowedWords.put("7", true);
-		allowedWords.put("8", true);
-		allowedWords.put("9", true);
-		allowedWords.put("0", true);
 	}
 	
 	static String restrictMessage(String message) {
@@ -55,14 +45,8 @@ public class ChatOverride {
 			String word = splitted[i];
 			if (allowedWords.get(word.toLowerCase()) != null) {
 				finalMsg += word + " ";
-			} else {
-				try {
-					Float f = Float.parseFloat(word);
-					finalMsg += f.toString() + " ";
-				}
-				catch (NumberFormatException nfe) {
-					
-				}
+			} else if (word.matches("-?\\d+(.\\d+)?")){
+				finalMsg += word + " ";
 			}
 		}
 		return finalMsg;
