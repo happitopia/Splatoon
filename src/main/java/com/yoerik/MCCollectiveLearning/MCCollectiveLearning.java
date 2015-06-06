@@ -9,6 +9,7 @@ import java.io.OutputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -19,6 +20,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class MCCollectiveLearning extends JavaPlugin {
@@ -29,6 +31,7 @@ public final class MCCollectiveLearning extends JavaPlugin {
 	FileConfiguration config;
 	FileConfiguration groups;
 	FileConfiguration history;
+	public final PlayerChatListener playerListener = new PlayerChatListener(this);
 	
 	private void copy(InputStream in, File file) {
 		try {
@@ -79,6 +82,7 @@ public final class MCCollectiveLearning extends JavaPlugin {
 	
 	@Override
 	public void onEnable() {
+		PluginManager pm = getServer().getPluginManager();
 		getLogger().info("onEnable has been invoked!");
 		configFile = new File(getDataFolder(), "config.yml");
 		try {
@@ -98,6 +102,7 @@ public final class MCCollectiveLearning extends JavaPlugin {
 			System.out.println("SQLState: " + ex.getSQLState());
 			System.out.println("VendorError: " + ex.getErrorCode());
 		}
+		pm.registerEvents(this.playerListener, this);
 	}
 	
 	public void startGame() {
@@ -164,12 +169,12 @@ public final class MCCollectiveLearning extends JavaPlugin {
 		return false;
 	}
 	
-	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = false)
-	public void onAsyncPlayerChatEvent(AsyncPlayerChatEvent event) {
+	//@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = false)
+	/*public void onAsyncPlayerChatEvent(AsyncPlayerChatEvent event) {
 		Player player = event.getPlayer();
 		String msg = event.getMessage();
 		if (msg == null) return;
 		String resultMsg = ChatOverride.restrictMessage(msg);
 		player.sendMessage(resultMsg);
-	}
+	}*/
 }

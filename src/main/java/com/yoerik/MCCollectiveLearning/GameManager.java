@@ -12,7 +12,6 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-// NOT THREAD SAFE!
 public class GameManager {
 	private static GameManager gm;
 	// Player data
@@ -31,7 +30,7 @@ public class GameManager {
 	}
 	
 	/**
-	 * Acquires an game based on its ID number
+	 * Acquires a game based on its ID number
 	 *
 	 * @param i
 	 *        the ID to search the games for
