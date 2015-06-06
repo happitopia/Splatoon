@@ -2,6 +2,6 @@
 cd "$(dirname "$0")"
 
 echo "Stopping server...."
-screen -r history -X stuff "stop$(printf \\r)"
+screen -x history -X stuff "stop$(printf \\r)"
 echo "Done"
 sleep 2
