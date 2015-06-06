@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -76,7 +75,7 @@ public class GameManager {
 		p.getInventory().setArmorContents(null);
 		p.getInventory().clear();
 		// Makes player use adventure
-		p.setGameMode(GameMode.ADVENTURE);
+		p.setGameMode(GameMode.SURVIVAL);
 		// Save the players's last location before joining,
 		// then teleporting them to the game spawn
 		locs.put(p.getUniqueId(), p.getLocation());
@@ -156,15 +155,5 @@ public class GameManager {
 			if (g.getPlayers().contains(p.getUniqueId())) return true;
 		}
 		return false;
-	}
-	
-	// UTILITY METHODS
-	public String serializeLoc(Location l) {
-		return l.getWorld().getName() + "," + l.getBlockX() + "," + l.getBlockY() + "," + l.getBlockZ();
-	}
-	
-	public Location deserializeLoc(String s) {
-		String[] st = s.split(",");
-		return new Location(Bukkit.getWorld(st[0]), Integer.parseInt(st[1]), Integer.parseInt(st[2]), Integer.parseInt(st[3]));
 	}
 }

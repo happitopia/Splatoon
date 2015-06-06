@@ -9,17 +9,10 @@ import java.io.OutputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -32,6 +25,8 @@ public final class MCCollectiveLearning extends JavaPlugin {
 	FileConfiguration groups;
 	FileConfiguration history;
 	public final PlayerChatListener playerListener = new PlayerChatListener(this);
+	public final ToolManager toolManager = new ToolManager(this);
+	public final CommandListener commandListener = new CommandListener(this);
 	
 	private void copy(InputStream in, File file) {
 		try {
@@ -102,7 +97,9 @@ public final class MCCollectiveLearning extends JavaPlugin {
 			System.out.println("SQLState: " + ex.getSQLState());
 			System.out.println("VendorError: " + ex.getErrorCode());
 		}
-		pm.registerEvents(this.playerListener, this);
+		pm.registerEvents(toolManager, this);
+		pm.registerEvents(playerListener, this);
+		getCommand("cl").setExecutor(commandListener);
 	}
 	
 	public void startGame() {
@@ -118,63 +115,4 @@ public final class MCCollectiveLearning extends JavaPlugin {
 		getLogger().info("onDisable has been invoked!");
 		saveYamls();
 	}
-	
-	@Override
-	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		if (cmd.getName().equalsIgnoreCase("cl")) {
-			if (!(sender instanceof Player)) {
-				sender.sendMessage("This command can only be run by a player.");
-			} else {
-				Player p = (Player) sender;
-				if (args.length == 0 || args[0].equalsIgnoreCase("help")) {
-					sender.sendMessage(ChatColor.AQUA + "Collective Learning Help:");
-					sender.sendMessage(ChatColor.BLUE + "  /cl help    Display help");
-					sender.sendMessage(ChatColor.BLUE + "  /cl create  create game");
-					sender.sendMessage(ChatColor.BLUE + "  /cl join    join game");
-					sender.sendMessage(ChatColor.BLUE + "  /cl leave   leave game");
-					sender.sendMessage(ChatColor.BLUE + "  /cl end     end game");
-					sender.sendMessage(ChatColor.BLUE + "  /cl manage  Manage player");
-				} else if (args[0].equalsIgnoreCase("create")) {
-					// Create game
-					GameManager.getManager().createGame(p.getLocation());
-				} else if (args[0].equalsIgnoreCase("join")) {
-					if (args.length == 2) {
-						// Join game
-						int num = 0;
-						try {
-							num = Integer.parseInt(args[1]);
-						}
-						catch (NumberFormatException e) {
-							p.sendMessage("Invalid game ID");
-						}
-						GameManager.getManager().addPlayer(p, num);
-					} else {
-						p.sendMessage("Usage: /cl join <id>");
-					}
-				} else if (args[0].equalsIgnoreCase("leave")) {
-					// Leave Game
-					GameManager.getManager().removePlayer(p);
-				} else if (args[0].equalsIgnoreCase("manage")) {
-					// TODO: Manage player(s)
-				} else if (args[0].equalsIgnoreCase("end")) {
-					// TODO: End game
-				} else if (args[0].equalsIgnoreCase("kick")) {
-					// TODO: Kick player from game
-				} else {
-					sender.sendMessage(ChatColor.RED + "unrecognized command: " + args[0]);
-				}
-			}
-			return true;
-		}
-		return false;
-	}
-	
-	//@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = false)
-	/*public void onAsyncPlayerChatEvent(AsyncPlayerChatEvent event) {
-		Player player = event.getPlayer();
-		String msg = event.getMessage();
-		if (msg == null) return;
-		String resultMsg = ChatOverride.restrictMessage(msg);
-		player.sendMessage(resultMsg);
-	}*/
 }
