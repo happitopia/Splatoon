@@ -32,7 +32,10 @@ public class CommandListener implements CommandExecutor {
 					if (commands.containsKey(args[0].toLowerCase())) {
 						CLCommand command = commands.get(args[0]);
 						return command.execute(plugin, sender, cmd, label, args);
-					} else if (args[0].equalsIgnoreCase("help")) {
+					} else if (args[0].equalsIgnoreCase("starttime")){
+						 DayNightCycle.SetDayNightCycle();     // reset the day to time=0
+					}
+					else if (args[0].equalsIgnoreCase("help")) {
 						sender.sendMessage(ChatColor.AQUA + "Collective Learning Commands:");
 						System.out.println(commands.keySet().toString());
 						for (String command : commands.keySet()) {
