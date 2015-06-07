@@ -1,14 +1,21 @@
 package com.yoerik.MCCollectiveLearning;
 
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.inventory.PrepareItemCraftEvent;
+import org.bukkit.inventory.ItemStack;
 
 public class ToolManager implements Listener {
 	public MCCollectiveLearning plugin;
@@ -59,6 +66,20 @@ public class ToolManager implements Listener {
 				default:
 					event.setCancelled(true);
 					break;
+			}
+		}
+	}
+	private static final Set<Material> allowedCraftingItems = new HashSet<Material>(Arrays.asList(new Material[] {Material.STICK, Material.WOOD}));
+	
+	@EventHandler
+	public void craftItem(PrepareItemCraftEvent e) {
+		Material itemType = e.getRecipe().getResult().getType();
+		if (!allowedCraftingItems.contains(itemType)) {
+			e.getInventory().setResult(new ItemStack(Material.AIR));
+			for (HumanEntity he : e.getViewers()) {
+				if (he instanceof Player) {
+					((Player) he).sendMessage(ChatColor.RED + "You cannot craft this!");
+				}
 			}
 		}
 	}
