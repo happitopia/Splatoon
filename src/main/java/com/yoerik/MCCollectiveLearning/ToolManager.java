@@ -20,7 +20,7 @@ public class ToolManager implements Listener {
 	@EventHandler(priority = EventPriority.NORMAL)
 	public void onBlockBreak(BlockBreakEvent event) {
 		Player player = event.getPlayer();
-		if (player.getGameMode() == GameMode.SURVIVAL && GameManager.getManager().isInGame(player)) {
+		if (player.getGameMode() == GameMode.SURVIVAL && plugin.gameManager.isInGame(player)) {
 			Block block = event.getBlock();
 			Material material = block.getType();
 			switch (material) {

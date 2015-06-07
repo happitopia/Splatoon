@@ -6,23 +6,51 @@ import java.util.Map;
 import java.util.UUID;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 public class GameManager {
-	private static GameManager gm;
+	private static MCCollectiveLearning plugin;
 	// Player data
 	private Map<UUID, Location> locs = new HashMap<UUID, Location>();
 	private Map<UUID, ItemStack[]> inv = new HashMap<UUID, ItemStack[]>();
 	private Map<UUID, ItemStack[]> armor = new HashMap<UUID, ItemStack[]>();
 	private final Game game = new Game();
 	
-	private GameManager() {} // Prevent instantiation
+	public GameManager(MCCollectiveLearning p) {
+		plugin = p;
+	}
 	
-	// Singleton accessor with lazy initialization
-	public static GameManager getManager() {
-		if (gm == null) gm = new GameManager();
-		return gm;
+	public void load() {
+		game.setSpawn(loadLocation("spawnLocation"));
+		game.setLobby(loadLocation("lobbyLocation"));
+	}
+	
+	private Location loadLocation(String prefix) {
+		try {
+			World world = plugin.getServer().getWorld((String) plugin.config.get(prefix + ".world"));
+			Double x = Double.parseDouble(plugin.config.get(prefix + ".x").toString());
+			Double y = Double.parseDouble((String) plugin.config.get(prefix + ".y").toString());
+			Double z = Double.parseDouble((String) plugin.config.get(prefix + ".z").toString());
+			float pitch = Float.parseFloat((String) plugin.config.get(prefix + ".pitch").toString());
+			float yaw = Float.parseFloat((String) plugin.config.get(prefix + ".yaw").toString());
+			return new Location(world, x, y, z, yaw, pitch);
+		}
+		catch (NullPointerException e) {
+			System.out.println("Error loading location");
+			e.printStackTrace();
+			return plugin.getServer().getWorld("world").getSpawnLocation();
+		}
+	}
+	
+	private void saveLocation(String prefix, Location location) {
+		plugin.config.set(prefix + ".world", location.getWorld().getName());
+		plugin.config.set(prefix + ".x", location.getX());
+		plugin.config.set(prefix + ".y", location.getY());
+		plugin.config.set(prefix + ".z", location.getZ());
+		plugin.config.set(prefix + ".pitch", location.getPitch());
+		plugin.config.set(prefix + ".yaw", location.getYaw());
 	}
 	
 	/**
@@ -110,9 +138,11 @@ public class GameManager {
 	
 	public void setSpawn(Location location) {
 		game.setSpawn(location);
+		saveLocation("spawnLocation", location);
 	}
 	
 	public void setLobby(Location location) {
 		game.setLobby(location);
+		saveLocation("lobbyLocation", location);
 	}
 }

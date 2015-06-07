@@ -1,7 +1,7 @@
 # This is the main configuration file for the Collective Learning plugin
 
 # Do not change this value.  It will cause this file to be replaced
-ConfigVersion: 0.1
+ConfigVersion: 0.12
 
 mysql:
   user: username
@@ -10,10 +10,18 @@ mysql:
   host: localhost
   database: minecraft
 
-permissions:
-    cl.*:
-        description: Gives access to all Collective Learning commands
-        children:
-            cl.startGame: true
-            cl.pauseGame: true
-            cl.endGame: true
+spawnLocation:
+  world: ""
+  x: 0
+  y: 0
+  z: 0
+  pitch: 0
+  yaw: 0
+
+lobbyLocation:
+  world: ""
+  x: 0
+  y: 0
+  z: 0
+  pitch: 0
+  yaw: 0

@@ -28,17 +28,22 @@ public class CommandListener implements CommandExecutor {
 			if (!(sender instanceof Player)) {
 				sender.sendMessage("This command can only be run by a player.");
 			} else {
-				if (commands.containsKey(args[0].toLowerCase())) {
-					CLCommand command = commands.get(args[0]);
-					return command.execute(sender, cmd, label, args);
-				} else if (args[0].equalsIgnoreCase("help")) {
-					sender.sendMessage(ChatColor.AQUA + "Collective Learning Commands:");
-					System.out.println(commands.keySet().toString());
-					for (String command : commands.keySet()) {
-						sender.sendMessage(ChatColor.YELLOW + command + " " + ChatColor.RED + commands.get(command).printHelp());
+				if (args.length > 0) {
+					if (commands.containsKey(args[0].toLowerCase())) {
+						CLCommand command = commands.get(args[0]);
+						return command.execute(plugin, sender, cmd, label, args);
+					} else if (args[0].equalsIgnoreCase("help")) {
+						sender.sendMessage(ChatColor.AQUA + "Collective Learning Commands:");
+						System.out.println(commands.keySet().toString());
+						for (String command : commands.keySet()) {
+							sender.sendMessage(ChatColor.YELLOW + command + " " + ChatColor.RED + commands.get(command).printHelp());
+						}
+					} else {
+						sender.sendMessage("Help: /cl help");
+						return true;
 					}
-				} else {
-					return false;
+				} else if (args.length == 0) {
+					sender.sendMessage("Help: /cl help");
 				}
 				return true;
 			}

@@ -7,3 +7,5 @@ commands:
       description: The main command for the collective learning game manager plugin
       usage: /cl help
       permission-message: You don't have CollectiveLearning.main
+
+      

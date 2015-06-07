@@ -7,10 +7,15 @@ import org.bukkit.entity.Player;
 
 public class CommandLeave extends CLCommand {
 	@Override
-	public boolean execute(CommandSender sender, Command cmd, String label, String[] args) {
+	public boolean execute(MCCollectiveLearning plugin, CommandSender sender, Command cmd, String label, String[] args) {
 		Player p = (Player) sender;
-		GameManager.getManager().removePlayer(p);
+		plugin.gameManager.removePlayer(p);
 		p.sendMessage("You have now left the game");
 		return true;
+	}
+	
+	@Override
+	public String printHelp() {
+		return "Leave game";
 	}
 }

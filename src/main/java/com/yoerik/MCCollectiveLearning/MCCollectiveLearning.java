@@ -19,14 +19,11 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class MCCollectiveLearning extends JavaPlugin {
 	Connection conn = null;
 	File configFile;
-	File groupsFile;
-	File historyFile;
-	FileConfiguration config;
-	FileConfiguration groups;
-	FileConfiguration history;
-	public final PlayerChatListener playerListener = new PlayerChatListener(this);
-	public final ToolManager toolManager = new ToolManager(this);
-	public final CommandListener commandListener = new CommandListener(this);
+	public FileConfiguration config;
+	public PlayerChatListener playerListener = new PlayerChatListener(this);
+	public ToolManager toolManager = new ToolManager(this);
+	public CommandListener commandListener = new CommandListener(this);
+	public GameManager gameManager = new GameManager(this);
 	
 	private void copy(InputStream in, File file) {
 		try {
@@ -64,7 +61,7 @@ public final class MCCollectiveLearning extends JavaPlugin {
 		try {
 			config.load(configFile);
 			getLogger().info("Config file version: '" + config.get("ConfigVersion") + "'");
-			if (!config.get("ConfigVersion").toString().equals("0.1")) {
+			if (!config.get("ConfigVersion").toString().equals("0.12")) {
 				getLogger().warning("Old config version found... Updating.");
 				copy(getResource("config.yml"), configFile);
 				loadYamls();
@@ -100,6 +97,7 @@ public final class MCCollectiveLearning extends JavaPlugin {
 		pm.registerEvents(toolManager, this);
 		pm.registerEvents(playerListener, this);
 		getCommand("cl").setExecutor(commandListener);
+		gameManager.load();
 	}
 	
 	public void startGame() {
