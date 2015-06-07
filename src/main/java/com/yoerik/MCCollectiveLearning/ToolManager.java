@@ -40,6 +40,9 @@ public class ToolManager implements Listener {
 				case STONE:
 				case COBBLESTONE:
 				case COAL_ORE:
+				case IRON_ORE:
+				case GOLD_ORE:
+				case DIAMOND_ORE:
 					checkBreak(player, Material.WOOD_PICKAXE, event);
 					break;
 				// Everyone can break these
@@ -52,6 +55,7 @@ public class ToolManager implements Listener {
 				case RED_ROSE:
 					event.setCancelled(false);
 					break;
+				// Nobody can break anything else
 				default:
 					event.setCancelled(true);
 					break;
