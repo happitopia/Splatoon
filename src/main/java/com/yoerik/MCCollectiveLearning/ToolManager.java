@@ -36,12 +36,12 @@ public class ToolManager implements Listener {
 				case DIRT:
 				case CLAY:
 				case GRASS:
-					checkBreak(player, Material.WOOD_SPADE, event);
+					checkBreak(player, Material.STONE_SPADE, event);
 					break;
 				// Axes can break these
 				case LOG:
 				case WOOD:
-					checkBreak(player, Material.WOOD_AXE, event);
+					checkBreak(player, Material.STONE_AXE, event);
 					break;
 				// Pickaxes can break these
 				case STONE:
@@ -50,7 +50,8 @@ public class ToolManager implements Listener {
 				case IRON_ORE:
 				case GOLD_ORE:
 				case DIAMOND_ORE:
-					checkBreak(player, Material.WOOD_PICKAXE, event);
+				case REDSTONE_ORE:
+					checkBreak(player, Material.STONE_PICKAXE, event);
 					break;
 				// Everyone can break these
 				case LONG_GRASS:
@@ -69,7 +70,7 @@ public class ToolManager implements Listener {
 			}
 		}
 	}
-	private static final Set<Material> allowedCraftingItems = new HashSet<Material>(Arrays.asList(new Material[] {Material.STICK, Material.WOOD}));
+	private static final Set<Material> allowedCraftingItems = new HashSet<Material>(Arrays.asList(new Material[] {Material.STICK, Material.WOOD, Material.WORKBENCH, Material.STONE_SPADE, Material.STONE_AXE, Material.STONE_PICKAXE, Material.STAINED_GLASS, Material.FURNACE}));
 	
 	@EventHandler
 	public void craftItem(PrepareItemCraftEvent e) {
