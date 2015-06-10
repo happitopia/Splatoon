@@ -15,6 +15,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitScheduler;
 
 public final class MCCollectiveLearning extends JavaPlugin {
 	Connection conn = null;
@@ -98,6 +99,8 @@ public final class MCCollectiveLearning extends JavaPlugin {
 		pm.registerEvents(playerListener, this);
 		getCommand("cl").setExecutor(commandListener);
 		gameManager.load();
+		BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
+		scheduler.scheduleSyncRepeatingTask(this, new DayNightCycle(),0L, 40L );
 	}
 	
 	public void startGame() {
