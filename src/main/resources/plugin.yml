@@ -1,6 +1,6 @@
 name: SplatoonMinecraft
 main: com.yoerik.SplatoonMinecraft.Splatoon
-version: 0.12
+version: 0.1
 
 commands:
    sp:

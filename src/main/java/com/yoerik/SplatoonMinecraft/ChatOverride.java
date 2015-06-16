@@ -7,7 +7,7 @@ import java.util.Set;
 
 public class ChatOverride {
 	private static final Set<String> allowedWords = new HashSet<String>(Arrays.asList(
-			new String[] {
+		new String[] {
 		"tree", "block", "you", "me", "i", "water", "axe", 
 		"sword", "house", "bed", "food", "mob", "yes", "no", 
 		"dirt", "stone", "glass", "wood", "here", "there", 

@@ -62,7 +62,7 @@ public final class Splatoon extends JavaPlugin {
 		try {
 			config.load(configFile);
 			getLogger().info("Config file version: '" + config.get("ConfigVersion") + "'");
-			if (!config.get("ConfigVersion").toString().equals("0.12")) {
+			if (!config.get("ConfigVersion").toString().equals("0.1")) {
 				getLogger().warning("Old config version found... Updating.");
 				copy(getResource("config.yml"), configFile);
 				loadYamls();
@@ -97,10 +97,10 @@ public final class Splatoon extends JavaPlugin {
 		}
 		pm.registerEvents(toolManager, this);
 		pm.registerEvents(playerListener, this);
-		getCommand("cl").setExecutor(commandListener);
+		getCommand("sp").setExecutor(commandListener);
 		gameManager.load();
 		BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
-		scheduler.scheduleSyncRepeatingTask(this, new DayNightCycle(),0L, 40L );
+		scheduler.scheduleSyncRepeatingTask(this, new DayNightCycle(), 0L, 40L);
 	}
 	
 	public void startGame() {
