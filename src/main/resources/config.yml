@@ -1,7 +1,7 @@
-# This is the main configuration file for the Collective Learning plugin
+# This is the main configuration file for the Splatoon plugin
 
 # Do not change this value.  It will cause this file to be replaced
-ConfigVersion: 0.12
+ConfigVersion: 0.10
 
 mysql:
   user: username

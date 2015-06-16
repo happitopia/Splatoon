@@ -11,14 +11,14 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 public class GameManager {
-	private static MCCollectiveLearning plugin;
+	private static Splatoon plugin;
 	// Player data
 	private Map<UUID, Location> locs = new HashMap<UUID, Location>();
 	private Map<UUID, ItemStack[]> inv = new HashMap<UUID, ItemStack[]>();
 	private Map<UUID, ItemStack[]> armor = new HashMap<UUID, ItemStack[]>();
 	private final Game game = new Game();
 	
-	public GameManager(MCCollectiveLearning p) {
+	public GameManager(Splatoon p) {
 		plugin = p;
 	}
 	

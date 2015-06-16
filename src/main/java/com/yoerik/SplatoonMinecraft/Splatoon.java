@@ -17,7 +17,7 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitScheduler;
 
-public final class MCCollectiveLearning extends JavaPlugin {
+public final class Splatoon extends JavaPlugin {
 	Connection conn = null;
 	File configFile;
 	public FileConfiguration config;

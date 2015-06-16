@@ -8,9 +8,9 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 public class PlayerChatListener implements Listener {
-	public MCCollectiveLearning plugin;
+	public Splatoon plugin;
 	
-	public PlayerChatListener(MCCollectiveLearning instance) {
+	public PlayerChatListener(Splatoon instance) {
 		this.plugin = instance;
 	}
 	

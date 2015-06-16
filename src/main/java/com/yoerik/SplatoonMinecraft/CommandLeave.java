@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
 
 public class CommandLeave extends CLCommand {
 	@Override
-	public boolean execute(MCCollectiveLearning plugin, CommandSender sender, Command cmd, String label, String[] args) {
+	public boolean execute(Splatoon plugin, CommandSender sender, Command cmd, String label, String[] args) {
 		Player p = (Player) sender;
 		plugin.gameManager.removePlayer(p);
 		p.sendMessage("You have now left the game");

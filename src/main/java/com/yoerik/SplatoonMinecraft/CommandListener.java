@@ -9,7 +9,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class CommandListener implements CommandExecutor {
-	MCCollectiveLearning plugin;
+	Splatoon plugin;
 	static HashMap<String, CLCommand> commands = new HashMap<String, CLCommand>();
 	static {
 		commands.put("join", new CommandJoin());
@@ -18,7 +18,7 @@ public class CommandListener implements CommandExecutor {
 		commands.put("setlobby", new CommandSetLobby());
 	}
 	
-	public CommandListener(MCCollectiveLearning plugin) {
+	public CommandListener(Splatoon plugin) {
 		this.plugin = plugin;
 	}
 	

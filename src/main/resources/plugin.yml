@@ -1,11 +1,11 @@
-name: CollectiveLearning
-main: com.yoerik.MCCollectiveLearning.MCCollectiveLearning
+name: SplatoonMinecraft
+main: com.yoerik.SplatoonMinecraft.Splatoon
 version: 0.12
 
 commands:
-   cl:
-      description: The main command for the collective learning game manager plugin
-      usage: /cl help
-      permission-message: You don't have CollectiveLearning.main
+   sp:
+      description: The main command for Splatoon
+      usage: /sp help
+      permission-message: You don't have Splatoon.main
 
       

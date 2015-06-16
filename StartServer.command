@@ -4,6 +4,6 @@ cd "$(dirname "$0")"
 cd TestServer
 
 echo "Starting server..."
-screen -dmS history java -jar spigot-*.jar
+screen -dmS splatoon java -jar spigot-*.jar
 echo "Done"
 sleep 2

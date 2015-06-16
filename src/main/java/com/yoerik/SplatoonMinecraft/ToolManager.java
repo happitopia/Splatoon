@@ -18,9 +18,9 @@ import org.bukkit.event.inventory.PrepareItemCraftEvent;
 import org.bukkit.inventory.ItemStack;
 
 public class ToolManager implements Listener {
-	public MCCollectiveLearning plugin;
+	public Splatoon plugin;
 	
-	public ToolManager(MCCollectiveLearning instance) {
+	public ToolManager(Splatoon instance) {
 		this.plugin = instance;
 	}
 	

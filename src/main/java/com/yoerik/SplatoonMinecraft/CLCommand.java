@@ -6,7 +6,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class CLCommand {
-	public boolean execute(MCCollectiveLearning plugin, CommandSender sender, Command cmd, String label, String[] args) {
+	public boolean execute(Splatoon plugin, CommandSender sender, Command cmd, String label, String[] args) {
 		Player p = (Player) sender;
 		p.sendMessage("Todo");
 		return true;
