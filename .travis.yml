@@ -5,7 +5,7 @@ notifications:
   email: change
 after_success:
 - openssl aes-256-cbc -K $encrypted_17d652b9b177_key -iv $encrypted_17d652b9b177_iv
-  -in .travis/happiserver.enc -out .travis/happiserver -d
+  -in .travis/happiserver.enc -out .travis/happiserver.pem -d
 - chmod 600 .travis/happiserver.pem
 - rsync -avz target -e 'ssh -i .travis/happiserver.pem' mcserver@happi.pw:/home/mcserver/build
 - rsync -avz target/*.jar -e 'ssh -i .travis/happiserver.pem' mcserver@happi.pw:/home/mcserver/history/plugins
