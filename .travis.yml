@@ -4,11 +4,11 @@ jdk:
 notifications:
   email: change
 after_success:
-- rsync -avz target -e 'ssh -i happiserver.pem' mcserver@happi.pw:/home/mcserver/build
-- rsync -avz target/*.jar -e 'ssh -i happiserver.pem' mcserver@happi.pw:/home/mcserver/history/plugins
+- openssl aes-256-cbc -K $encrypted_17d652b9b177_key -iv $encrypted_17d652b9b177_iv
+  -in .travis/happiserver.enc -out .travis/happiserver -d
+- chmod 600 .travis/happiserver.pem
+- rsync -avz target -e 'ssh -i .travis/happiserver.pem' mcserver@happi.pw:/home/mcserver/build
+- rsync -avz target/*.jar -e 'ssh -i .travis/happiserver.pem' mcserver@happi.pw:/home/mcserver/history/plugins
 addons:
   ssh_known_hosts:
   - happi.pw
-before_install:
-- openssl aes-256-cbc -K $encrypted_feb4fc3dc1b5_key -iv $encrypted_feb4fc3dc1b5_iv -in .travis/happiserver.enc -out happiserver.pem -d
-- chmod 600 happiserver.pem
