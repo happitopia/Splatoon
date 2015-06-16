@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.UUID;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -72,7 +73,8 @@ public class GameManager {
 			return false;
 		}
 		// Adds the player to the game player list
-		game.addPlayer(p);
+		Team team = new Team(Material.WOOL);
+		game.addPlayer(p, team);
 		// Save the inventory and armor
 		inv.put(p.getUniqueId(), p.getInventory().getContents());
 		armor.put(p.getUniqueId(), p.getInventory().getArmorContents());

@@ -5,7 +5,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class CommandSetLobby extends CLCommand {
+public class CommandSetLobby extends SPCommand {
 	@Override
 	public boolean execute(Splatoon plugin, CommandSender sender, Command cmd, String label, String[] args) {
 		Player p = (Player) sender;

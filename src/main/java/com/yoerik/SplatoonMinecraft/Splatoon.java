@@ -105,7 +105,7 @@ public final class Splatoon extends JavaPlugin {
 	
 	public void startGame() {
 		for (Player player : Bukkit.getServer().getOnlinePlayers()) {
-			if (player.hasPermission("send.receive.message")) {
+			if (player.hasPermission("sp.gamemsg")) {
 				player.sendMessage("Game starting");
 			}
 		}
@@ -113,7 +113,14 @@ public final class Splatoon extends JavaPlugin {
 	
 	@Override
 	public void onDisable() {
-		getLogger().info("onDisable has been invoked!");
+		getLogger().info("Disabling Splatoon");
+		try {
+			conn.close();
+		}
+		catch (SQLException e) {
+			getLogger().info("Error disconnecting from MySQL");
+			e.printStackTrace();
+		}
 		saveYamls();
 	}
 }

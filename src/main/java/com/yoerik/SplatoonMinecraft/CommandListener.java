@@ -10,7 +10,7 @@ import org.bukkit.entity.Player;
 
 public class CommandListener implements CommandExecutor {
 	Splatoon plugin;
-	static HashMap<String, CLCommand> commands = new HashMap<String, CLCommand>();
+	static HashMap<String, SPCommand> commands = new HashMap<String, SPCommand>();
 	static {
 		commands.put("join", new CommandJoin());
 		commands.put("leave", new CommandLeave());
@@ -30,7 +30,7 @@ public class CommandListener implements CommandExecutor {
 			} else {
 				if (args.length > 0) {
 					if (commands.containsKey(args[0].toLowerCase())) {
-						CLCommand command = commands.get(args[0]);
+						SPCommand command = commands.get(args[0]);
 						return command.execute(plugin, sender, cmd, label, args);
 					} else if (args[0].equalsIgnoreCase("starttime")){
 						 DayNightCycle.SetDayNightCycle();     // reset the day to time=0
