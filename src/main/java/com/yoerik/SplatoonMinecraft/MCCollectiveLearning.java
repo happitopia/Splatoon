@@ -1,4 +1,4 @@
-package com.yoerik.MCCollectiveLearning;
+package com.yoerik.SplatoonMinecraft;
 
 
 import java.io.File;

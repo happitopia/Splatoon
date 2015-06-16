@@ -1,21 +1,24 @@
-package com.yoerik.MCCollectiveLearning;
+package com.yoerik.SplatoonMinecraft;
 
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class CommandSetSpawn extends CLCommand {
+public class CommandJoin extends CLCommand {
 	@Override
 	public boolean execute(MCCollectiveLearning plugin, CommandSender sender, Command cmd, String label, String[] args) {
 		Player p = (Player) sender;
-		plugin.gameManager.setSpawn(p.getLocation());
-		p.sendMessage("Spawn Location set");
+		if (plugin.gameManager.addPlayer(p)) {
+			p.sendMessage("You have now joined the game.");
+		} else {
+			p.sendMessage("Error joining game...");
+		}
 		return true;
 	}
 	
 	@Override
 	public String printHelp() {
-		return "Set spawn location";
+		return "Join game";
 	}
 }

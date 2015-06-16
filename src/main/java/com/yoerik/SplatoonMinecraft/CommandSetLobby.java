@@ -1,21 +1,21 @@
-package com.yoerik.MCCollectiveLearning;
+package com.yoerik.SplatoonMinecraft;
 
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class CommandLeave extends CLCommand {
+public class CommandSetLobby extends CLCommand {
 	@Override
 	public boolean execute(MCCollectiveLearning plugin, CommandSender sender, Command cmd, String label, String[] args) {
 		Player p = (Player) sender;
-		plugin.gameManager.removePlayer(p);
-		p.sendMessage("You have now left the game");
+		plugin.gameManager.setLobby(p.getLocation());
+		p.sendMessage("Lobby Location set");
 		return true;
 	}
 	
 	@Override
 	public String printHelp() {
-		return "Leave game";
+		return "Set lobby location";
 	}
 }
